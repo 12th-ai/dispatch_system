@@ -1,11 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { ref } from 'vue';
-import GlobalLoader from "@/widget/GlobalLoader.vue";
 
-// Set up a reactive variable to manage the loader state
-const isLoading = ref(false);
-
-// Lazy-load layouts and pages
 const AuthLayout = () =>
     import ('../layout/AuthLayout.vue');
 const ProtectedLayout = () =>
@@ -88,18 +83,4 @@ const router = createRouter({
     ],
 });
 
-// Global navigation guard to show loader before navigating to a route
-router.beforeEach((to, from, next) => {
-    isLoading.value = true; // Show loader
-    setTimeout(() => {
-        next(); // Delay route navigation if needed
-    }, 1000); // You can change the delay duration as needed
-});
-
-// Hide loader after navigation
-router.afterEach(() => {
-    isLoading.value = false; // Hide loader
-});
-
-export { isLoading }; // Export for use in the main app
 export default router;
